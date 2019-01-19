@@ -1,0 +1,10 @@
+package com.Inheritance;
+
+public class Inheritance2 {
+	
+	public void sample()
+	{
+		System.out.println("Sample method is executed");
+	}
+
+}

@@ -1,0 +1,43 @@
+package javaProgram;
+
+public class MethodExample2 {
+
+	int a=10;
+	int b=20;
+	int c;
+	
+	public void Addition()
+	{
+		c=a+b;
+		System.out.println(c);
+	}
+	
+	public void Subtraction()
+	{
+		c=a-b;
+		System.out.println(c);
+	}
+	
+	public void Multiplication()
+	{
+		c=a*b;
+		System.out.println(c);
+	}
+	
+	public void Division()
+	{
+		c=a/b;
+		System.out.println(c);
+	}
+	
+	public static void main(String[] args)
+	{
+		MethodExample2 ME2 = new MethodExample2();
+		
+		ME2.Addition();
+		ME2.Subtraction();
+		ME2.Multiplication();
+		ME2.Division();
+	}
+
+}

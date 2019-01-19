@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="2" total="7" passed="5">
+  <reporter-output>
+  </reporter-output>
+  <suite name="TestNGSamples" duration-ms="75" started-at="2019-01-09T17:46:29Z" finished-at="2019-01-09T17:46:29Z">
+    <groups>
+    </groups>
+    <test name="TestAnnotation" duration-ms="75" started-at="2019-01-09T17:46:29Z" finished-at="2019-01-09T17:46:29Z">
+      <class name="com.TestNGAnnotations.TestAnnotation$Annotations1">
+        <test-method status="PASS" signature="login()[pri:0, instance:com.TestNGAnnotations.TestAnnotation$Annotations1@1f7030a6]" name="login" duration-ms="9" started-at="2019-01-09T17:46:29Z" finished-at="2019-01-09T17:46:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- login -->
+        <test-method status="PASS" signature="Composemail()[pri:2, instance:com.TestNGAnnotations.TestAnnotation$Annotations1@1f7030a6]" name="Composemail" duration-ms="4" started-at="2019-01-09T17:46:29Z" finished-at="2019-01-09T17:46:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Composemail -->
+        <test-method status="PASS" signature="drafts()[pri:3, instance:com.TestNGAnnotations.TestAnnotation$Annotations1@1f7030a6]" name="drafts" duration-ms="4" started-at="2019-01-09T17:46:29Z" finished-at="2019-01-09T17:46:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- drafts -->
+      </class> <!-- com.TestNGAnnotations.TestAnnotation$Annotations1 -->
+    </test> <!-- TestAnnotation -->
+    <test name="TestAfterMethod" duration-ms="61" started-at="2019-01-09T17:46:29Z" finished-at="2019-01-09T17:46:29Z">
+      <class name="com.TestNGAnnotations.Beforemethod_Test_AfterMethod$Annotation2">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.TestNGAnnotations.Beforemethod_Test_AfterMethod$Annotation2@2f943d71]" name="setup" is-config="true" duration-ms="7" started-at="2019-01-09T17:46:29Z" finished-at="2019-01-09T17:46:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="login()[pri:0, instance:com.TestNGAnnotations.Beforemethod_Test_AfterMethod$Annotation2@2f943d71]" name="login" duration-ms="5" started-at="2019-01-09T17:46:29Z" finished-at="2019-01-09T17:46:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- login -->
+        <test-method status="PASS" signature="drafts()[pri:0, instance:com.TestNGAnnotations.Beforemethod_Test_AfterMethod$Annotation2@2f943d71]" name="drafts" is-config="true" duration-ms="2" started-at="2019-01-09T17:46:29Z" finished-at="2019-01-09T17:46:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- drafts -->
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.TestNGAnnotations.Beforemethod_Test_AfterMethod$Annotation2@2f943d71]" name="setup" is-config="true" duration-ms="1" started-at="2019-01-09T17:46:29Z" finished-at="2019-01-09T17:46:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="Composemail()[pri:1, instance:com.TestNGAnnotations.Beforemethod_Test_AfterMethod$Annotation2@2f943d71]" name="Composemail" duration-ms="2" started-at="2019-01-09T17:46:29Z" finished-at="2019-01-09T17:46:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Composemail -->
+        <test-method status="PASS" signature="drafts()[pri:0, instance:com.TestNGAnnotations.Beforemethod_Test_AfterMethod$Annotation2@2f943d71]" name="drafts" is-config="true" duration-ms="2" started-at="2019-01-09T17:46:29Z" finished-at="2019-01-09T17:46:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- drafts -->
+      </class> <!-- com.TestNGAnnotations.Beforemethod_Test_AfterMethod$Annotation2 -->
+    </test> <!-- TestAfterMethod -->
+  </suite> <!-- TestNGSamples -->
+</testng-results>

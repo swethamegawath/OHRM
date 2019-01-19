@@ -1,0 +1,34 @@
+package com.ExcelOperations;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class Excel_SampleData_Read {
+
+	public static void main(String[] args) throws IOException {
+		
+		FileInputStream file = new FileInputStream("C:\\Users\\Megawath\\Desktop\\selenium project\\WebApplication\\src\\com\\SampleTestData\\sample.xlsx");
+		XSSFWorkbook workbook = new XSSFWorkbook(file);
+		XSSFSheet sheet = workbook.getSheet("Data");
+		
+		int RowCount=sheet.getLastRowNum();
+		for(int i=0;i<=RowCount;i++)
+		{
+			Row r = sheet.getRow(i);
+
+			int CellCOunt = r.getLastCellNum();
+			for(int k=0;k<=CellCOunt;k++)
+			{
+				Cell c = r.getCell(k);
+				System.out.println(c.getStringCellValue());
+			}
+		}
+	}
+
+}

@@ -1,0 +1,9 @@
+package com.Inheritance;
+
+public class Inheritance3 {
+	public void Sample2()
+	{
+		System.out.println("Sample2 is executed successfully");
+	}
+
+}

@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="TestNGSamples" parallel="tests">
+ <test name="TestAnnotation">
+  <classes>
+   <class name="com.TestNGAnnotations.TestAnnotation"/>
+  </classes>
+ </test>
+
+<test name="TestAfterMethod">
+ <classes>
+  <class name="com.TestNGAnnotations.Beforemethod_Test_AfterMethod"/>
+ </classes>
+</test>
+</suite>

@@ -1,0 +1,222 @@
+package com.OHRM;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.List;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class Login_AddEmployee_DeleteEmployee
+{
+	WebDriver driver= null;
+	String url="http://127.0.0.1/orangehrm-4.2.0.1/symfony/web/index.php/auth/login";
+	
+	@BeforeTest
+	public void setup()
+	{
+		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"\\driverfiles\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.get(url);
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				
+	}
+	
+	@Test(priority=0)
+	public void Login() throws IOException
+	{
+		
+		FileInputStream file= new FileInputStream("C:\\Users\\Megawath\\Desktop\\selenium project\\OrangeHRM_WebApplication\\OHRM.Properties");
+		Properties pr=new Properties();
+		pr.load(file);
+		
+		driver.findElement(By.id(pr.getProperty("UName"))).sendKeys("admin");
+		driver.findElement(By.id(pr.getProperty("Password"))).sendKeys("Maansingh$0408");
+		driver.findElement(By.id(pr.getProperty("LogIn"))).click();
+		
+		String Actual_Url = driver.getCurrentUrl();
+		System.out.println(Actual_Url);
+		String Expected_url = "http://127.0.0.1/orangehrm-4.2.0.1/symfony/web/index.php/dashboard";
+		if(Actual_Url.equals(Expected_url))
+		{
+		System.out.println("Successfully navigated to login page");
+		}
+		else
+		{
+			System.out.println("Failed to navigate to login page");
+		}
+	}
+	
+	
+	@Test(priority=1)
+	public void AddEmployee() throws IOException, InterruptedException
+	{
+		WebElement PIM=driver.findElement(By.id("menu_pim_viewPimModule"));
+		Actions act = new Actions(driver);
+		act.moveToElement(PIM).perform();
+		WebElement EmployeeList = driver.findElement(By.id("menu_pim_viewEmployeeList"));
+		act.moveToElement(EmployeeList).perform();
+		act.moveToElement(EmployeeList).click().perform();
+		
+		driver.findElement(By.id("btnAdd")).click();
+		//tblAttachments
+		String AddActual_Text=driver.findElement(By.xpath("//*[@id='content']/div/div[1]/h1")).getText();
+		System.out.println("the actual text is "+AddActual_Text);
+		String AddExpected_Text="Add Employee";
+		if(AddActual_Text.equals(AddExpected_Text))
+		{
+			System.out.println("Successfully navigated to add employee page - PASS");
+		}
+		else
+		{
+			System.out.println("Failed to navigate to add employee page - FAIL");
+		}
+		
+		driver.findElement(By.id("firstName")).sendKeys("Dinesh");
+		driver.findElement(By.id("lastName")).sendKeys("Mujje");
+		driver.findElement(By.id("btnSave")).click();
+		
+		String SaveActual_Text=driver.findElement(By.xpath("//*[@id='pdMainContainer']/div[1]/h1")).getText();
+		String SaveExpected_Text = "Personal Details";
+		if(SaveActual_Text.equals(SaveExpected_Text))
+		{
+			System.out.println("Successfully navigated to Personal details page - PASS");
+		}
+		else
+		{
+			System.out.println("Failed to navigate to personal details page - FAIL");
+		}
+		
+		driver.findElement(By.id("btnSave")).click();
+		driver.findElement(By.id("personal_txtLicenNo")).sendKeys("ghet56y3");
+		driver.findElement(By.name("personal[txtLicExpDate]")).click();
+		driver.findElement(By.name("personal[txtLicExpDate]")).sendKeys("2028-06-10");
+		String Gender="Female";
+		if(Gender.equals("Male"))
+		{
+			driver.findElement(By.id("personal_optGender_1")).click();	
+		}
+		else
+		{		
+			driver.findElement(By.id("personal_optGender_2")).click();
+		}
+		driver.findElement(By.id("personal_cmbMarital")).sendKeys("Married");
+		driver.findElement(By.id("personal_cmbNation")).sendKeys("Indian");
+		driver.findElement(By.id("personal_DOB")).clear();
+		driver.findElement(By.id("personal_DOB")).sendKeys("1990-08-04");
+		driver.findElement(By.id("btnSave")).click();
+		
+		driver.findElement(By.id("btnSave")).click();
+		
+		driver.findElement(By.id("btnAddAttachment")).click();
+		driver.findElement(By.id("ufile")).click();
+		
+		java.lang.Runtime.getRuntime().exec("C:\\Users\\Megawath\\Desktop\\selenium project\\OrangeHRM_WebApplication\\AutoIT\\File.exe");
+		Thread.sleep(3000);
+		driver.findElement(By.id("btnSaveAttachment")).click();
+		
+		driver.findElement(By.linkText("Contact Details")).click();
+		String ContactActual_Text=driver.findElement(By.xpath("//*[@id='contact-details']/div[2]/div[1]/h1")).getText();
+		String ContactExpected_Text="Contact Details";
+		if(ContactActual_Text.equals(ContactExpected_Text))
+		{
+			System.out.println("Successfully navigated to Contact details page - PASS");
+		}
+		else
+		{
+			System.out.println("Failed to navogate to contact details page - FAIL");
+		}
+		driver.findElement(By.id("btnSave")).click();
+		//id=contact_street1
+		driver.findElement(By.id("contact_street1")).sendKeys("12-10/151");
+		//id=contact_street2
+		driver.findElement(By.id("contact_street2")).sendKeys("Kushi Gardens");
+		//id=contact_city
+		driver.findElement(By.id("contact_city")).sendKeys("Hyderabad");
+		//id=contact_province
+		driver.findElement(By.id("contact_province")).sendKeys("Telanagana");
+		//id=contact_emp_zipcode
+		driver.findElement(By.id("contact_emp_zipcode")).sendKeys("500062");
+		//id=contact_country
+		driver.findElement(By.id("contact_country")).sendKeys("India");
+		//id=contact_emp_hm_telephone
+		driver.findElement(By.id("contact_emp_hm_telephone")).sendKeys("98567899");
+		//id=contact_emp_mobile
+		driver.findElement(By.id("contact_emp_mobile")).sendKeys("987654321");
+		//id=contact_emp_work_telephone
+		driver.findElement(By.id("contact_emp_work_telephone")).sendKeys("0908778");
+		//id=contact_emp_work_email
+		driver.findElement(By.id("contact_emp_work_email")).clear();
+		driver.findElement(By.id("contact_emp_work_email")).sendKeys("hhjh6f@hjhjk.com");
+		//id=contact_emp_oth_email
+		driver.findElement(By.id("contact_emp_oth_email")).clear();
+		driver.findElement(By.id("contact_emp_oth_email")).sendKeys("n8967j@mkj.com");
+		//id=btnSave
+		driver.findElement(By.id("btnSave")).click();
+		
+		driver.findElement(By.id("btnAddAttachment")).click();
+		driver.findElement(By.id("ufile")).click();
+		java.lang.Runtime.getRuntime().exec("C:\\Users\\Megawath\\Desktop\\selenium project\\OrangeHRM_WebApplication\\AutoIT\\File.exe");
+		Thread.sleep(2000);
+		//id=btnSaveAttachment
+		driver.findElement(By.id("btnSaveAttachment")).click();
+		
+	}
+	
+	
+	@Test(priority=2)
+	public void DeleteEmployee() throws InterruptedException
+	{
+		WebElement PIM=driver.findElement(By.id("menu_pim_viewPimModule"));
+		Actions act = new Actions(driver);
+		act.moveToElement(PIM).perform();
+		WebElement EmployeeList = driver.findElement(By.id("menu_pim_viewEmployeeList"));
+		act.moveToElement(EmployeeList).perform();
+		act.moveToElement(EmployeeList).click().perform();
+		Thread.sleep(3000);
+		//driver.findElement(By.id("empsearch_id")).sendKeys("");
+		driver.findElement(By.id("empsearch_employee_name_empName")).sendKeys("Dinesh");
+		driver.findElement(By.id("searchBtn")).click();
+		
+		WebElement table=driver.findElement(By.id("resultTable"));
+		String RowText=driver.findElement(By.xpath("//*[@id=\"resultTable\"]/tbody/tr/td")).getText();
+		List<WebElement> Rows=driver.findElements(By.xpath("//*[@id='resultTable']/tbody/tr"));
+		System.out.println("the number of rows are "+Rows.size());
+		
+		for(int i=0;i<Rows.size();i++)
+		{
+			
+			driver.findElement(By.xpath("//html/body/div/div[3]/div[2]/div/form/div[4]/table/tbody/tr"+i+"/td[1]/")).click();
+			
+		}
+		Thread.sleep(5000);
+		driver.findElement(By.id("btnDelete")).click();
+		WebElement Logout=driver.findElement(By.id("welcome"));
+		act.moveToElement(Logout).click().perform();
+		driver.findElement(By.linkText("Logout")).click();
+		
+	}
+	
+	
+	@AfterTest
+	public void TearDown()
+	{
+		driver.quit();
+	}
+	
+}
+
+
+
+
+
+

@@ -1,0 +1,6 @@
+#Locator name for Username element
+UserName=txtUserName
+#locator name for Password element
+Password=txtPassword
+#locator name for login element
+Login=Submit

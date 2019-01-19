@@ -1,0 +1,49 @@
+package com.OrangeHRM;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class Basic {
+
+	public static void main(String[] args) {
+		
+		System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir")+"\\driverfiles\\chromedriver.exe");
+		WebDriver driver=null;
+		driver = new FirefoxDriver();  
+		driver.get("http://localhost/orangehrm-2.6/orangehrm-2.6/index.php");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+		driver.findElement(By.name("txtUserName")).sendKeys("admin");
+		driver.findElement(By.name("txtPassword")).sendKeys("admin");
+		driver.findElement(By.name("Submit")).click();
+		driver.switchTo().frame(driver.findElement(By.id("rightMenu")));
+				
+		driver.findElement(By.id("loc_code")).sendKeys("Emp ID");
+		driver.findElement(By.id("loc_name")).sendKeys("0010");
+		driver.findElement(By.xpath("//*[@value='Search']")).click();
+		
+		WebElement Table=driver.findElement(By.className("maincontent"));
+		////*[@id="standardView"]/table/tbody/tr/td[1]
+		WebElement Row=Table.findElement(By.xpath("//*[@id=\"standardView\"]/table/tbody/tr/td[1]"));
+		if(Row.isDisplayed())
+		{
+			System.out.println("Row is found in the webtable");
+			////*[@id="standardView"]/table/tbody/tr/td[1]
+			Table.findElement(By.xpath("//*[@id=\"standardView\"]/table/tbody/tr/td[1]")).click();
+			driver.findElement(By.xpath("//*[@onclick='returnDelete();']"));
+		}
+		else
+		{
+		  String Message = driver.findElement(By.className("noresultsbar")).getText();
+		  System.out.println("the message is "+Message);
+		}
+		
+	}
+
+}

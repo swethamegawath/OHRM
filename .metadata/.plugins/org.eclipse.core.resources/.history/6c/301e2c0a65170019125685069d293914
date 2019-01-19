@@ -1,0 +1,98 @@
+package com.OHRM;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class Login_AddEmployee_DeleteEmployee
+{
+	WebDriver driver= null;
+	String url="http://127.0.0.1/orangehrm-4.2.0.1/symfony/web/index.php/auth/login";
+	
+	@BeforeTest
+	public void setup()
+	{
+		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"\\driverfiles\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.get(url);
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				
+	}
+	
+	@Test(priority=0)
+	public void Login() throws IOException
+	{
+		
+		FileInputStream file= new FileInputStream("C:\\Users\\Megawath\\Desktop\\selenium project\\OrangeHRM_WebApplication\\OHRM.Properties");
+		Properties pr=new Properties();
+		pr.load(file);
+		
+		driver.findElement(By.id(pr.getProperty("UName"))).sendKeys("admin");
+		driver.findElement(By.id(pr.getProperty("Password"))).sendKeys("Maansingh$0408");
+		driver.findElement(By.id(pr.getProperty("LogIn"))).click();
+		
+		String Actual_Url = driver.getCurrentUrl();
+		System.out.println(Actual_Url);
+		String Expected_url = "http://127.0.0.1/orangehrm-4.2.0.1/symfony/web/index.php/dashboard";
+		if(Actual_Url.equals(Expected_url))
+		{
+		System.out.println("Successfully navigated to login page");
+		}
+		else
+		{
+			System.out.println("Failed to navigate to login page");
+		}
+	}
+	
+	
+	@Test(priority=1)
+	public void AddEmployee() throws IOException, InterruptedException
+	{
+		WebElement PIM=driver.findElement(By.id("menu_pim_viewPimModule"));
+		Actions act = new Actions(driver);
+		act.moveToElement(PIM).perform();
+		WebElement EmployeeList = driver.findElement(By.id("menu_pim_viewEmployeeList"));
+		act.moveToElement(EmployeeList).perform();
+		act.moveToElement(EmployeeList).click().perform();
+		
+		driver.findElement(By.id("btnAdd")).click();
+		driver.findElement(By.id("firstName")).sendKeys("Dinesh");
+		driver.findElement(By.id("lastName")).sendKeys("Mujje");
+		driver.findElement(By.id("btnSave")).click();
+		
+		driver.findElement(By.id("btnSave")).click();
+		driver.findElement(By.id("personal_txtLicenNo")).sendKeys("ghet56y3");
+		driver.findElement(By.name("personal[txtLicExpDate]")).sendKeys("2028-06-10");
+		String Gender="Female";
+		if(Gender.equals("Male"))
+		{
+			driver.findElement(By.id("personal_optGender_1")).click();	
+		}
+		else
+		{		
+			driver.findElement(By.id("personal_optGender_2")).click();
+		}
+		driver.findElement(By.id("personal_cmbMarital")).sendKeys("Married");
+		driver.findElement(By.id("personal_cmbNation")).sendKeys("Indian");
+		driver.findElement(By.id("personal_DOB")).sendKeys("1990-08-04");
+		driver.findElement(By.id("btnSave")).click();
+		driver.findElement(By.id("btnSave")).click();
+		driver.findElement(By.id("btnAddAttachment")).click();
+		driver.findElement(By.id("ufile")).click();
+		
+		java.lang.Runtime.getRuntime().exec("C:\\Users\\Megawath\\Desktop\\selenium project\\OrangeHRM_WebApplication\\AutoIT\\File.exe");
+		Thread.sleep(3000);
+		driver.findElement(By.id("btnSaveAttachment")).click();
+		driver.findElement(By.linkText("Contact Details")).click();
+	}
+}

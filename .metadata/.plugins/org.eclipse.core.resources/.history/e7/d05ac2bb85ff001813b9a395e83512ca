@@ -1,0 +1,20 @@
+package javaProgram;
+
+public class MethodExample2 {
+
+	int a=10;
+	int b=20;
+	int c;
+	public void Addition()
+	{
+		
+	}
+	
+	public static void main(String[] args)
+	{
+
+
+
+	}
+
+}
